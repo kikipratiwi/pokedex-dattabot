@@ -1,16 +1,18 @@
+import React, { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
   CardMedia,
+  Chip,
   Divider,
   Stack,
   Typography,
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
+import { Box } from "@mui/system";
 import axios from "axios";
-import AtomLoading from "components/components/atoms/Loading";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import CircleIcon from "@mui/icons-material/Circle";
 
 const style = {
   position: "absolute",
@@ -21,6 +23,8 @@ const style = {
   borderRadius: 2,
   border: `1px solid ${grey[200]}`,
   boxShadow: 5,
+  minWidth: { xs: "80%", sm: "50%", md: "50%", lg: "40%" },
+  px: 2,
 };
 
 const AtomPokemonDetail = ({ name }) => {
@@ -37,7 +41,6 @@ const AtomPokemonDetail = ({ name }) => {
 
       setPokemonDetail(response);
       setIsloading(false);
-      console.log(response);
     } catch (error) {
       console.error(error);
     }
@@ -48,15 +51,19 @@ const AtomPokemonDetail = ({ name }) => {
   }, [name]);
 
   return (
-    <Card sx={{ ...style }}>
+    <Card
+      sx={{
+        ...style,
+      }}
+    >
       {isLoading ? (
-        <AtomLoading />
+        <Typography sx={{ px: 10, py: 5 }}> Loading ...</Typography>
       ) : (
         <>
           <div style={{ position: "relative" }}>
             <CardMedia
               style={{
-                filter: "blur(13px)",
+                filter: "blur(13px) opacity(.8)",
                 position: "relative",
               }}
               component="img"
@@ -64,7 +71,7 @@ const AtomPokemonDetail = ({ name }) => {
               image={
                 pokemonDetail.sprites.other["official-artwork"].front_default
               }
-              alt="green iguana"
+              alt="Pokemon Background"
             />
             <div
               style={{
@@ -81,47 +88,185 @@ const AtomPokemonDetail = ({ name }) => {
                 src={
                   pokemonDetail.sprites.other["official-artwork"].front_default
                 }
-                alt={
-                  pokemonDetail.sprites.other["official-artwork"].front_default
-                }
+                alt="Pokemon Avatar"
                 width={150}
                 height={150}
               />
             </div>
           </div>
 
-          <CardContent sx={{ mt: 4 }}>
-            <Typography gutterBottom variant="h5" component="div">
-              {pokemonDetail.name}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Lizards are a widespread group of squamate reptiles, with over
-              6,000 species, ranging across all continents except Antarctica
-            </Typography>
-
-            <Typography gutterBottom variant="h6" component="div">
-              Abilities
-            </Typography>
+          <CardContent sx={{ mt: 3 }}>
             <Stack
-              direction="row"
-              divider={<Divider orientation="vertical" flexItem />}
-              spacing={2}
+              direction={{ sm: "column", md: "row" }}
+              spacing={{ xs: 1, md: 2 }}
+              alignItems="center"
+              justifyContent="space-between"
             >
-              {pokemonDetail.abilities.map(
-                ({ ability: { name, is_hidden, slot } }, index) => {
+              <Typography variant="h4" fontWeight={700} component="div">
+                {pokemonDetail.name}
+              </Typography>
+
+              <Stack direction="row" spacing={1} alignItems="center">
+                {pokemonDetail.types.map(({ type: { name } }, index) => {
                   return (
-                    !is_hidden && (
+                    <Chip
+                      key={index}
+                      size="small"
+                      label={
+                        <Typography color="#fff" px={1}>
+                          {name}
+                        </Typography>
+                      }
+                      color="primary"
+                    />
+                  );
+                })}
+              </Stack>
+            </Stack>
+
+            <Stack
+              direction={{ sm: "column", md: "row" }}
+              spacing={{ xs: 1, md: 2 }}
+              alignItems="center"
+              py={2}
+              divider={
+                <Box
+                  display={{
+                    xs: "none",
+                    md: "block",
+                  }}
+                >
+                  <CircleIcon
+                    color="primary"
+                    sx={{
+                      fontSize: 5,
+                    }}
+                  />
+                </Box>
+              }
+            >
+              <Stack direction="row" spacing={1} alignItems="center">
+                <Typography
+                  variant="body2"
+                  color="text.primary"
+                  fontWeight={600}
+                >
+                  Best Experience
+                </Typography>
+
+                <Typography variant="body2" color="text.secondary">
+                  {pokemonDetail.base_experience}
+                </Typography>
+              </Stack>
+
+              <Stack direction="row" spacing={1} alignItems="center">
+                <Typography
+                  variant="body2"
+                  color="text.primary"
+                  fontWeight={600}
+                >
+                  Weight
+                </Typography>
+
+                <Typography variant="body2" color="text.secondary">
+                  {pokemonDetail.weight}
+                </Typography>
+              </Stack>
+
+              <Stack direction="row" spacing={1} alignItems="center">
+                <Typography
+                  variant="body2"
+                  color="text.primary"
+                  fontWeight={600}
+                >
+                  Height
+                </Typography>
+
+                <Typography variant="body2" color="text.secondary">
+                  {pokemonDetail.height}
+                </Typography>
+              </Stack>
+            </Stack>
+
+            <Stack direction="row" spacing={3} alignItems="start" mt={1}>
+              <Stack spacing={2} width="55%">
+                <Stack>
+                  <Typography gutterBottom variant="h6">
+                    Abilities
+                  </Typography>
+
+                  <Stack
+                    direction="row"
+                    divider={<Divider orientation="vertical" flexItem />}
+                    spacing={2}
+                  >
+                    {pokemonDetail.abilities.map(
+                      ({ ability: { name, is_hidden } }, index) => {
+                        return (
+                          !is_hidden && (
+                            <Typography
+                              variant="body2"
+                              color="text.secondary"
+                              key={index}
+                            >
+                              {name}
+                            </Typography>
+                          )
+                        );
+                      },
+                    )}
+                  </Stack>
+                </Stack>
+
+                <Box>
+                  <Typography gutterBottom variant="h6">
+                    Stats
+                  </Typography>
+
+                  <Stack spacing={1}>
+                    {pokemonDetail.stats.map(
+                      ({ stat: { name }, base_stat }, index) => {
+                        return (
+                          <Stack
+                            direction="row"
+                            key={index}
+                            spacing={1}
+                            alignItems="center"
+                          >
+                            <Typography variant="body2" color="text.primary">
+                              {name}
+                            </Typography>
+
+                            <Typography variant="body2" color="text.secondary">
+                              {base_stat}
+                            </Typography>
+                          </Stack>
+                        );
+                      },
+                    )}
+                  </Stack>
+                </Box>
+              </Stack>
+
+              <Box pl={2}>
+                <Typography gutterBottom variant="h6">
+                  Moves
+                </Typography>
+
+                <Box maxHeight={240} overflow="auto">
+                  {pokemonDetail.moves.map(({ move: { name } }, index) => {
+                    return (
                       <Typography
+                        key={index}
                         variant="body2"
                         color="text.secondary"
-                        key={index}
                       >
                         {name}
                       </Typography>
-                    )
-                  );
-                },
-              )}
+                    );
+                  })}
+                </Box>
+              </Box>
             </Stack>
           </CardContent>
         </>

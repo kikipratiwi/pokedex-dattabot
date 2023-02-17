@@ -6,25 +6,23 @@ import {
   Paper,
   Stack,
 } from "@mui/material";
+import { useRouter } from "next/router";
 import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
 import FolderSpecialIcon from "@mui/icons-material/FolderSpecial";
 import HomeIcon from "@mui/icons-material/Home";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
-
-import { useRouter } from "next/router";
 import Image from "next/image";
 
-export default function Layout({ children }) {
+export default function Layout({ url, children }) {
   const route = useRouter();
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(url);
 
   const navigateMenu = (event, newValue) => {
     setValue(newValue);
 
     setTimeout(() => {
-      if (!newValue) route.push(`/`);
-      else route.push(`/pokemon/${newValue}`);
-    }, [50]);
+      route.push(newValue);
+    }, [300]);
   };
 
   return (
@@ -69,20 +67,20 @@ export default function Layout({ children }) {
           value={value}
           onChange={navigateMenu}
         >
-          <BottomNavigationAction label="Home" value="" icon={<HomeIcon />} />
+          <BottomNavigationAction label="Home" value="/" icon={<HomeIcon />} />
           <BottomNavigationAction
             label="Library"
-            value="library"
+            value="/pokemon/library"
             icon={<FolderSpecialIcon />}
           />
           <BottomNavigationAction
             label="Get Your Pokémon"
-            value="get-pokemon"
+            value="/pokemon/get-pokemon"
             icon={<AutoFixHighIcon />}
           />
           <BottomNavigationAction
             label="Profile"
-            value="profile"
+            value="/user/profile"
             icon={<InsertEmoticonIcon />}
           />
         </BottomNavigation>
