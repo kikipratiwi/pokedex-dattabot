@@ -109,3 +109,27 @@ a:hover {
 .MuiBottomNavigationAction-root.Mui-selected {
   color: #fff;
 }
+
+.login-background {
+  background: hsla(0, 0%, 100%, 1);
+
+  background: linear-gradient(
+    90deg,
+    hsla(0, 0%, 100%, 1) 0%,
+    hsla(47, 100%, 52%, 1) 100%
+  );
+
+  background: -moz-linear-gradient(
+    900deg,
+    hsla(0, 0%, 100%, 1) 0%,
+    hsla(47, 100%, 52%, 1) 100%
+  );
+
+  background: -webkit-linear-gradient(
+    90deg,
+    hsla(0, 0%, 100%, 1) 0%,
+    hsla(47, 100%, 52%, 1) 100%
+  );
+
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#ffffff", endColorstr="#ffca0b", GradientType=1 );
+}
