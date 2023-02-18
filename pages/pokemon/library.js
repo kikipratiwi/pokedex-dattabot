@@ -3,13 +3,15 @@ import { Typography, Grid, Stack, Modal } from "@mui/material";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import AtomLoading from "components/atoms/Loading";
-import AtomPokemonDetail from "components/atoms/DetailPokemon";
-import Layout from "components/components/layouts";
+import MoleculePokemonDetail from "components/molecules/DetailPokemon";
+import Layout from "components/layouts";
 
 import usePagination from "hooks/usePagination";
+import { grey } from "@mui/material/colors";
 
 const Library = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [error, setError] = useState(false);
   const [selectedPokemon, setSelectedPokemon] = useState("");
   const { data, next, setPage } = usePagination(
     "https://pokeapi.co/api/v2/pokemon",
@@ -75,7 +77,21 @@ const Library = () => {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <AtomPokemonDetail name={selectedPokemon} />
+          <MoleculePokemonDetail
+            setError={setError}
+            error={error}
+            cardStyle={{
+              borderRadius: 2,
+              border: `1px solid ${grey[200]}`,
+              boxShadow: 5,
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              minWidth: { xs: "80%", sm: "50%", md: "50%", lg: "40%" },
+            }}
+            name={selectedPokemon}
+          />
         </Modal>
       </Stack>
     </Layout>
