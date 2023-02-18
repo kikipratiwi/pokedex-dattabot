@@ -26,14 +26,7 @@ export default function Layout({ url, children }) {
   };
 
   return (
-    <Stack
-      alignItems="center"
-      height="100vh"
-      pb="56px"
-      pt={2}
-      px={5}
-      spacing={2}
-    >
+    <Stack alignItems="center" height="100vh" pt={2} px={5} spacing={2}>
       <Box>
         <div style={{ position: "relative", width: 200, height: 90 }}>
           <Image

@@ -1,4 +1,4 @@
-import Layout from "components/components/layouts";
+import Layout from "components/layouts";
 import React from "react";
 
 const Profile = () => {

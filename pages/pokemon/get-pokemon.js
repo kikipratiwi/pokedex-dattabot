@@ -18,18 +18,18 @@ const style = {
   bgcolor: "white",
   border: 0,
   boxShadow: "none",
-  px: 2,
 };
 
 const GetPokemon = () => {
   const TOTAL_POKEMON = 1279;
   const { pokemons, addPokemon } = usePokemonStore((state) => state);
 
+  const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const [selectedPokemon, setSelectedPokemon] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [error, setError] = useState(false);
+  const [pokemonName, setPokemonName] = useState("");
+  const [selectedPokemon, setSelectedPokemon] = useState("");
 
   const getPokemon = () => {
     setIsLoading(true);
@@ -47,10 +47,8 @@ const GetPokemon = () => {
   };
 
   const addPokemonToStorage = () => {
-    addPokemon(selectedPokemon);
-
+    addPokemon(pokemonName);
     setOpenSnackbar(true);
-
     closeModal();
   };
 
@@ -58,6 +56,7 @@ const GetPokemon = () => {
     setIsLoading(false);
     setIsOpenModal(false);
     setSelectedPokemon("");
+    setPokemonName("");
   };
 
   return (
@@ -89,35 +88,38 @@ const GetPokemon = () => {
             <MoleculePokemonDetail
               setError={setError}
               error={error}
-              name={selectedPokemon}
+              pokemonIdentifier={selectedPokemon}
+              setPokemonName={setPokemonName}
             />
 
-            <Stack
-              direction="row"
-              alignItems="end"
-              justifyContent="end"
-              spacing={1}
-              pt={1}
-              pb={2}
-            >
-              <Button
-                size="small"
-                onClick={closeModal}
-                variant={error ? "contained" : "text"}
+            {pokemonName && (
+              <Stack
+                direction="row"
+                alignItems="end"
+                justifyContent="end"
+                spacing={1}
+                px={2}
+                pb={2}
               >
-                {error ? "Try again" : "Dismiss"}
-              </Button>
-              {!error && (
                 <Button
                   size="small"
-                  variant="contained"
-                  onClick={addPokemonToStorage}
-                  endIcon={<FavoriteIcon />}
+                  onClick={closeModal}
+                  variant={error ? "contained" : "text"}
                 >
-                  Add to collection
+                  {error ? "Try again" : "Dismiss"}
                 </Button>
-              )}
-            </Stack>
+                {!error && (
+                  <Button
+                    size="small"
+                    variant="contained"
+                    onClick={addPokemonToStorage}
+                    endIcon={<FavoriteIcon />}
+                  >
+                    Add to collection
+                  </Button>
+                )}
+              </Stack>
+            )}
           </Card>
         </Modal>
       </Box>
@@ -126,7 +128,7 @@ const GetPokemon = () => {
         open={openSnackbar}
         autoHideDuration={4000}
         onClose={() => setOpenSnackbar(false)}
-        message="Pokémon added to your collection!"
+        message="Pokémon has been added to your collection!"
       />
     </Layout>
   );

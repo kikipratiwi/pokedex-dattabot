@@ -25,6 +25,7 @@ const usePagination = (url) => {
 
   useEffect(() => {
     fetchData(url);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   return {

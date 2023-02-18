@@ -20,7 +20,13 @@ const style = {
   px: 2,
 };
 
-const MoleculePokemonDetail = ({ error, setError, cardStyle, name }) => {
+const MoleculePokemonDetail = ({
+  cardStyle,
+  error,
+  pokemonIdentifier,
+  setError = () => {},
+  setPokemonName = () => {},
+}) => {
   const [pokemonDetail, setPokemonDetail] = useState();
   const [isLoading, setIsloading] = useState(true);
 
@@ -30,9 +36,11 @@ const MoleculePokemonDetail = ({ error, setError, cardStyle, name }) => {
 
     try {
       const { data: response } = await axios.get(
-        `https://pokeapi.co/api/v2/pokemon/${name}`,
+        `https://pokeapi.co/api/v2/pokemon/${pokemonIdentifier}`,
       );
+      const { name } = response;
 
+      setPokemonName(name);
       setPokemonDetail(response);
     } catch (error) {
       console.error(error);
@@ -43,9 +51,9 @@ const MoleculePokemonDetail = ({ error, setError, cardStyle, name }) => {
   }
 
   useEffect(() => {
-    if (name) fetchData();
+    if (pokemonIdentifier) fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [name]);
+  }, [pokemonIdentifier]);
 
   return (
     <Card
@@ -55,7 +63,7 @@ const MoleculePokemonDetail = ({ error, setError, cardStyle, name }) => {
       }}
     >
       {isLoading ? (
-        <Typography sx={{ px: 10, py: 5 }}> Loading ...</Typography>
+        <Typography sx={{ py: 5 }}> Loading ...</Typography>
       ) : error ? (
         <Typography pt={5}>
           Sorry, Pokémon not found, please try again
