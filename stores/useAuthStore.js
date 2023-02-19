@@ -5,7 +5,19 @@ const useAuthStore = create(
   persist(
     (set) => ({
       isLogin: false,
-      setLogin: (login) => set(() => ({ isLogin: login })),
+      userLogin: {
+        firstName: "",
+        lastName: "",
+        age: "",
+        gender: "",
+        email: "",
+        phone: "",
+        username: "",
+        birthDate: "",
+        image: "",
+      },
+      setLogin: (login, userLogin) =>
+        set(() => ({ isLogin: login, userLogin })),
     }),
     { name: "user" },
   ),
