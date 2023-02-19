@@ -92,34 +92,33 @@ const GetPokemon = () => {
               setPokemonName={setPokemonName}
             />
 
-              <Stack
-                direction="row"
-                alignItems="end"
-                justifyContent="end"
-                spacing={1}
-                px={2}
-                pb={2}
+            <Stack
+              direction="row"
+              alignItems="end"
+              justifyContent="end"
+              spacing={1}
+              px={2}
+              pb={2}
+            >
+              <Button
+                size="small"
+                onClick={closeModal}
+                variant={error ? "contained" : "text"}
               >
+                {error ? "Try again" : "Dismiss"}
+              </Button>
+
+              {!error && pokemonName && (
                 <Button
                   size="small"
-                  onClick={closeModal}
-                  variant={error ? "contained" : "text"}
+                  variant="contained"
+                  onClick={addPokemonToStorage}
+                  endIcon={<FavoriteIcon />}
                 >
-                  {error ? "Try again" : "Dismiss"}
+                  Add to collection
                 </Button>
-
-                {!error &&
-                  pokemonName &&(
-                    <Button
-                      size="small"
-                      variant="contained"
-                      onClick={addPokemonToStorage}
-                      endIcon={<FavoriteIcon />}
-                    >
-                      Add to collection
-                    </Button>,
-                  )}
-              </Stack>
+              )}
+            </Stack>
           </Card>
         </Modal>
       </Box>

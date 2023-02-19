@@ -14,8 +14,7 @@ const Home = () => {
 
   useEffect(() => {
     setData(pokemons);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [pokemons]);
 
   return (
     <Layout url="/">
