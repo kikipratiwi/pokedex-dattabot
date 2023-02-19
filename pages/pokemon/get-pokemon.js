@@ -92,7 +92,6 @@ const GetPokemon = () => {
               setPokemonName={setPokemonName}
             />
 
-            {pokemonName && (
               <Stack
                 direction="row"
                 alignItems="end"
@@ -108,18 +107,19 @@ const GetPokemon = () => {
                 >
                   {error ? "Try again" : "Dismiss"}
                 </Button>
-                {!error && (
-                  <Button
-                    size="small"
-                    variant="contained"
-                    onClick={addPokemonToStorage}
-                    endIcon={<FavoriteIcon />}
-                  >
-                    Add to collection
-                  </Button>
-                )}
+
+                {!error &&
+                  pokemonName &&(
+                    <Button
+                      size="small"
+                      variant="contained"
+                      onClick={addPokemonToStorage}
+                      endIcon={<FavoriteIcon />}
+                    >
+                      Add to collection
+                    </Button>,
+                  )}
               </Stack>
-            )}
           </Card>
         </Modal>
       </Box>

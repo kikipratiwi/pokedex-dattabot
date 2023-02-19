@@ -22,7 +22,7 @@ export default function Layout({ url, children }) {
 
     setTimeout(() => {
       route.push(newValue);
-    }, [300]);
+    }, [200]);
   };
 
   return (
