@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Chip, Typography } from "@mui/material";
+import { Button, Chip, Typography } from "@mui/material";
 import { Box, Stack } from "@mui/system";
+import { useRouter } from "next/router";
 import { TwitterTimelineEmbed } from "react-twitter-embed";
 
 import Layout from "components/layouts";
@@ -10,6 +11,7 @@ import usePokemonStore from "stores/usePokemonStore";
 
 const Home = () => {
   const { pokemons } = usePokemonStore((state) => state);
+  const router = useRouter();
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -45,6 +47,22 @@ const Home = () => {
                 }
               />
             </Stack>
+
+            {data.length === 0 && (
+              <Stack alignItems="center" spacing={2} pt={1}>
+                <Typography variant="body2">
+                  {`Opps, you don't seem to have any pokémon, let's add some! `}
+                </Typography>
+
+                <Button
+                  sx={{ width: 200 }}
+                  variant="contained"
+                  onClick={() => router.push("/pokemon/get-pokemon")}
+                >
+                  Get Pokémon
+                </Button>
+              </Stack>
+            )}
 
             <div style={{ maxWidth: "700px", paddingBottom: "100px" }}>
               <MoleculePokemonList data={data} next={false} />
