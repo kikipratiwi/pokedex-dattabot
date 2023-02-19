@@ -7,9 +7,36 @@ Open [Pokedex Dattabot Live](https://main--stirring-dragon-d1666f.netlify.app/) 
 ### Checklist requirement
 - [x] Login Page (using dummy json, for certain user)
 - [x] Profile Page (using dummy json)
-- [x] Home Page (diplay Pokemon's twitter @Pokemon timeline followed by "Your Pokemon" list)
-- [x] Get Your Pokemon
-- [x] Pokemon Library
+- [x] Home Page (diplay Pokémon's twitter @Pokemon timeline followed by "Your Pokémon" list)
+- [x] Get Your Pokémon
+- [x] Pokémon Library
+- [x] Responsive view
+
+### App Screenshot
+
+#### Login Page
+![image](https://user-images.githubusercontent.com/20922216/219912012-639ebf5c-e35f-4a96-b3ae-470e43770b15.png)
+
+#### Home Page
+![image](https://user-images.githubusercontent.com/20922216/219912149-368af87a-6b87-4aba-8355-60344a5cd31e.png)
+
+![image](https://user-images.githubusercontent.com/20922216/219912344-f38e8dc0-12cd-49d6-b382-9f66cc9167f2.png)
+
+![image](https://user-images.githubusercontent.com/20922216/219912415-9a4f91e2-5402-4fa7-8812-106bb54b29e6.png)
+
+#### Library Page
+![image](https://user-images.githubusercontent.com/20922216/219912531-736adea8-9dc5-4479-a49a-43b76020df34.png)
+
+![image](https://user-images.githubusercontent.com/20922216/219912581-f7c195a9-2321-49b6-be97-0514942d3cba.png)
+
+#### Get Pokémon Page
+![image](https://user-images.githubusercontent.com/20922216/219912771-f9c32c31-3c75-4e03-8fe9-bc054f113884.png)
+
+![image](https://user-images.githubusercontent.com/20922216/219913107-0039d27f-4dcb-4117-8b59-f06cdf0d5c5d.png)
+
+#### Profile Page
+![image](https://user-images.githubusercontent.com/20922216/219913237-e32a186a-d709-4a9a-8250-cd6c70504b17.png)
+
 
 ## About Project
 
